@@ -1,4 +1,4 @@
-from debian:bookworm-slim
+FROM debian:bookworm-slim
 
 LABEL maintainer Zachary Johnson "zachfsx83@gmail.com"
 
