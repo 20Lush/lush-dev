@@ -1,8 +1,6 @@
-export DOCKER_BUILDKIT=1
-
 from debian:bookworm-slim
 
-MAINTAINER Zachary Johnson "zachfsx83@gmail.com"
+LABEL maintainer Zachary Johnson "zachfsx83@gmail.com"
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
