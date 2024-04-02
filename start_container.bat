@@ -8,4 +8,4 @@ if "%~1"=="" (
 )
 
 @echo starting container with image: %IMGARG% at %CURRENTDIR%
-docker run -it --rm -e "TERM=xterm-256color" -v %CURRENTDIR%:/repo %IMGARG% bash
+docker run -it --rm --net="host" -v %CURRENTDIR%:/repo %IMGARG% bash

@@ -13,6 +13,10 @@ RUN apt-get update && \
         cmake \
         libgtest-dev \
         valgrind \
+        net-tools \
+        iputils-ping \
+        wget \
+        ca-certificates \
         libpcsclite-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists
