@@ -2,6 +2,8 @@ FROM debian:bookworm-slim
 
 LABEL maintainer Zachary Johnson "zachfsx83@gmail.com"
 
+ENV TERM xterm-256color
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         git \

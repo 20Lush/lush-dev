@@ -1,10 +1,11 @@
 @echo off
 
-set img-arg=%1
+SET IMGARG=%1
+SET CURRENTDIR=%cd%
 
 if "%~1"=="" (
-    set img-arg=ghcr.io/20lush/lush-dev:latest
+    SEt IMGARG=ghcr.io/20lush/lush-dev:latest
 )
 
-@echo starting container with image: %img-arg%
-docker run -it --rm %img-arg% bash
+@echo starting container with image: %IMGARG% at %CURRENTDIR%
+docker run -it --rm -e "TERM=xterm-256color" -v %CURRENTDIR%:/repo %IMGARG% bash
