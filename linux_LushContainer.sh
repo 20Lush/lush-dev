@@ -28,4 +28,9 @@ if [ $autoupdate -eq 1 ]; then
 fi
 
 echo "[INFO] Starting container with image: ${image} at ${mountdir}"
-docker run -it --rm --net="host" -v ${mountdir}:/repo ${image} bash
+docker run  -it \
+            --rm \
+            --network="host" \
+            #--entrypoint /setup.sh \
+            -v ${mountdir}:/repo \
+            ${image} bash
