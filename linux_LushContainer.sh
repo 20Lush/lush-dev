@@ -31,6 +31,5 @@ echo "[INFO] Starting container with image: ${image} at ${mountdir}"
 docker run  -it \
             --rm \
             --network="host" \
-            #--entrypoint /setup.sh \
             -v ${mountdir}:/repo \
             ${image} bash
