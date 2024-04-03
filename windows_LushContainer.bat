@@ -7,7 +7,7 @@ SET "AUTOUPDATE=TRUE"
 :loop
 IF NOT "%1"=="" (
     IF "%1"=="-u" (
-        echo [INFO] Wont automatically update dev container image
+        echo [INFO] Wont automatically update dev container image...
         SET "AUTOUPDATE=FALSE"
         SHIFT
     )
@@ -16,7 +16,7 @@ IF NOT "%1"=="" (
         SET MOUNTDIR=%2
         SHIFT
     )
-    IF "%1"=="--help" (
+    IF "%1"=="-h" (
         echo [HELP] -u Dont check for new container version .. ex. start_container.bat -u
         echo [HELP] -p Specifically set a path to mount .. ex. start_container.bat -p "~/Documents"
         echo [HELP] -h Help, usage information .. ex. start_container.bat -h
@@ -33,4 +33,4 @@ if "%AUTOUPDATE%"=="TRUE" (
 )
 
 @echo [INFO] Starting container with image: %IMGARG% at %MOUNTDIR%
-::docker run -it --rm --net="host" -v %CURRENTDIR%:/repo %IMGARG% bash
+docker run -it --rm --net="host" -v %CURRENTDIR%:/repo %IMGARG% bash
