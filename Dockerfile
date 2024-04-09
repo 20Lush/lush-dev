@@ -12,6 +12,7 @@ RUN apt-get update && \
         pkg-config \
         cmake \
         libgtest-dev \
+        libgmock-dev \
         valgrind \
         net-tools \
         iputils-ping \
