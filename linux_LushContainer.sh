@@ -1,10 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 image=ghcr.io/20lush/lush-dev:latest
 mountdir=${PWD}
+entrypoint_script="/setup.sh"
 autoupdate=1
 
-while getopts 'up:h' flag; do
+while getopts 'up:hr' flag; do
     case "${flag}" in
         u)
             echo "[INFO] Wont automatically update dev container image..."
@@ -15,10 +16,13 @@ while getopts 'up:h' flag; do
             mountdir=${OPTARG}
             ;;
         h)
-            echo "[HELP] -u Dont check for new container version .. ex. start_container.bat -u"
-            echo "[HELP] -p Specifically set a path to mount .. ex. start_container.bat -p '~/Documents'"
-            echo "[HELP] -h Help, usage information .. ex. start_container.bat -h"
+            echo "[HELP] -u Dont check for new container version    ..  ex. start_container.bat -u"
+            echo "[HELP] -p Specifically set a path to mount    ......  ex. start_container.bat -p '~/Documents'"
+            echo "[HELP] -h Help, usage information     ..............  ex. start_container.bat -h"
             ;;
+        r)
+            echo "[INFO] Logging into container as root..."
+            entrypoint_script="/bin/bash"
     esac
 done
 
@@ -32,4 +36,5 @@ docker run  -it \
             --rm \
             --network="host" \
             -v ${mountdir}:/repo \
-            ${image} bash
+            --entrypoint ${entrypoint_script} \
+            ${image}
