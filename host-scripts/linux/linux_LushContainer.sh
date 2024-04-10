@@ -34,6 +34,8 @@ fi
 echo "[INFO] Starting container with image: ${image} at ${mountdir}"
 docker run  -it \
             --rm \
+            -e "TERM=xterm-256color" \
+            -h "lush-dev" \
             --network="host" \
             -v ${mountdir}:/repo \
             --entrypoint ${entrypoint_script} \

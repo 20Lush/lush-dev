@@ -1,6 +1,7 @@
 #!/bin/bash
+source /etc/profile
 
-groupadd -g 1111 devs
-useradd -u 1112 dev
+groupadd devs
+adduser --disabled-password --gecos "" -q dev
 
-su -p dev
+su -l dev -P -c "cd /; /bin/bash"
