@@ -23,11 +23,11 @@ IF NOT "%1"=="" (
         echo [HELP] -h Help, usage information     ..............  ex. start_lushdev.bat -h
         exit 0
     )
-    if "%1"=="-r"{
+    if "%1"=="-r" (
         echo [INFO] Logging into container as root...
         SET ENTRYPOINT_SCRIPT=/bin/bash
         SHIFT
-    }
+    )
     SHIFT
     GOTO :loop
 )
@@ -39,4 +39,4 @@ if "%AUTOUPDATE%"=="TRUE" (
 )
 
 @echo [INFO] Starting container with image: %IMGARG% at %MOUNTDIR%
-docker run  -it --rm -e "TERM=xterm-256color" -h "lush-dev" --network="host" -v %CURRENTDIR%:/repo --entrypoint %ENTRYPOINT_SCRIPT% %IMGARG%
+docker run  -it --rm -e "TERM=xterm-256color" -h "lush-dev" --network="host" -v %MOUNTDIR%:/repo --entrypoint %ENTRYPOINT_SCRIPT% %IMGARG%
