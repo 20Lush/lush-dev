@@ -1,32 +1,38 @@
-# lush-dev
-Debian based container for developing with my projects (without having to cross-compile to windows LOL). Relevant scripts are provided, supporting both Linux and Windows seperately just to make things harder on me but easier to use in the end.
+# Welcome to lush-dev!
+### lush-dev is a Debian based container for developing with my projects. 
+Relevant scripts are provided, supporting both Linux and Windows seperately just to make things harder on me but easier to use in the end.
 
-# Quick start
+# Usage
+Using the dev container takes a little bit of work, but you'll only have to set it up once per machine. The only dependencies are **git** and **docker** which are availible on both Windows and Linux, and in both platforms are going to be run on the command line. Recommended to use `Powershell` on Windows.
+
+## Getting the helper scripts
 First lets pull this repo, we want the scripts!
 ```bash
 git clone https://github.com/20Lush/lush-dev.git
 ```
-OPTIONALLY you can add `./lush-dev` to your path, now that its cloned. Doing so would allow you to call the start scripts from anywhere, and its a lot more ergonomic.
+This should create a directory in wherever your terminal is right now.
 
+<details><summary markdown="span"><i>~!!!~ OPTIONAL Add startup scripts to your $PATH</i></summary>
+
+## Setting up PATH variables for ease-of-access to the start scripts.
+### Addding scripts Windows PATH
+- In the Windows search bar, type in `System environment variables` and click the result that talks about editing the so-called environment variables
+- Click the `Environment Variables` near the bottom of the dialogue
+- In the `System Variables` box on the bottom, scroll to find and double click the `Path` variable, it should open a new dialogue showing stuff already inside.
+- Click the `New` button and insert the directory containing the scripts from the repo you cloned above
+  - It would be something like `C:\<blah>\<blah>\<blah>\lush-dev\host-scripts\windows`
+- Press OK on the dialogues till you're out.
+- You need to refresh your Windows Explorer now, which can be done by right clicking the `Windows Explorer` process in Task Manager, or simply by restarting your computer. Restarting your computer is safer, restarting WinExplr is faster.
+- You should now be able to call `start_lushdev.bat` anywhere on the command line! This will start the container in your current working directory (which should be a repo you are working in).
+
+### Adding Scripts to Linux PATH
+
+</details>
+
+### Pulling the container artifact, the thing you should use.
 Now lets pull my development container...
 ```bash
 docker pull ghcr.io/20lush/lush-dev:latest
 ```
 For sanity checking, you might want to run `docker images` to make sure its all in there.
 
-You can now call `start_container.bat`(windows) in any repository of mine and have everything set up you need to get stuff done and develop!
-
-# Usage
-This repo's images are stored in the Github Container Registry! Use the command below to pull the image.
-```bash
-    docker pull ghcr.io/20lush/lush-dev:latest
-```
-The scripts I use to launch my containers and do some management are found in [this repository](https://github.com/20Lush/lush-dev) as well, though YMMV and I cannot guarantee for them to work everywhere.
-
-There is no entrypoint built in from the Dockerfile, you will have to specify one if you are manually running a container from this image.
-
-But if you are using my [start scripts(windows)](start_container.bat) you can just run:
-```bash
-   .\start_container.bat <OPTIONAL IMAGE SPEC>
-```
-And be off and away. This will put you into the root shell of the container. It will mount the current directory it was called from in /repo/. So you'd want to clone the repo on host and call it in from there. If your host is windows, you might want to add this cloned repo to your PATH.
