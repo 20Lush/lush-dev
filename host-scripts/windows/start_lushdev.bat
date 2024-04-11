@@ -2,6 +2,7 @@
 
 SET IMGARG=ghcr.io/20lush/lush-dev:latest
 SET MOUNTDIR=%cd%
+SET ENTRYPOINT_SCRIPT=/setup.sh
 SET "AUTOUPDATE=TRUE"
 
 :loop
@@ -17,11 +18,16 @@ IF NOT "%1"=="" (
         SHIFT
     )
     IF "%1"=="-h" (
-        echo [HELP] -u Dont check for new container version .. ex. start_container.bat -u
-        echo [HELP] -p Specifically set a path to mount .. ex. start_container.bat -p "~/Documents"
-        echo [HELP] -h Help, usage information .. ex. start_container.bat -h
+        echo [HELP] -u Dont check for new container version    ..  ex. start_lushdev.bat -u
+        echo [HELP] -p Specifically set a path to mount    ......  ex. start_lushdev.bat -p '~/Documents'
+        echo [HELP] -h Help, usage information     ..............  ex. start_lushdev.bat -h
         exit 0
     )
+    if "%1"=="-r"{
+        echo [INFO] Logging into container as root...
+        SET ENTRYPOINT_SCRIPT=/bin/bash
+        SHIFT
+    }
     SHIFT
     GOTO :loop
 )
@@ -33,4 +39,11 @@ if "%AUTOUPDATE%"=="TRUE" (
 )
 
 @echo [INFO] Starting container with image: %IMGARG% at %MOUNTDIR%
-docker run -it --rm --net="host" -v %CURRENTDIR%:/repo %IMGARG% bash
+docker run  -it \
+            --rm \
+            -e "TERM=xterm-256color" \
+            -h "lush-dev" \
+            --network="host" \
+            -v %CURRENTDIR%:/repo \
+            --entrypoint %ENTRYPOINT_SCRIPT% \
+            %IMGARG%

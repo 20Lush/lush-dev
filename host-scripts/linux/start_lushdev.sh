@@ -16,9 +16,9 @@ while getopts 'up:hr' flag; do
             mountdir=${OPTARG}
             ;;
         h)
-            echo "[HELP] -u Dont check for new container version    ..  ex. start_container.bat -u"
-            echo "[HELP] -p Specifically set a path to mount    ......  ex. start_container.bat -p '~/Documents'"
-            echo "[HELP] -h Help, usage information     ..............  ex. start_container.bat -h"
+            echo "[HELP] -u Dont check for new container version    ..  ex. start_lushdev.sh -u"
+            echo "[HELP] -p Specifically set a path to mount    ......  ex. start_lushdev.sh -p '~/Documents'"
+            echo "[HELP] -h Help, usage information     ..............  ex. start_lushdev.sh -h"
             ;;
         r)
             echo "[INFO] Logging into container as root..."
