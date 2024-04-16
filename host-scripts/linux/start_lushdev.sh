@@ -5,7 +5,7 @@ mountdir=${PWD}
 entrypoint_script="/setup.sh"
 autoupdate=1
 
-while getopts 'up:hr' flag; do
+while getopts 'up:hri:' flag; do
     case "${flag}" in
         u)
             echo "[INFO] Wont automatically update dev container image..."
@@ -23,18 +23,22 @@ while getopts 'up:hr' flag; do
         r)
             echo "[INFO] Logging into container as root..."
             entrypoint_script="/bin/bash"
+            ;;
+        i)
+            echo "[INFO] Overriding image to $OPTARG"
+            image="$OPTARG"
+            ;;
     esac
 done
 
 if [ $autoupdate -eq 1 ]; then
     echo "[INFO] Checking latest dev container..."
-    docker pull -q ghcr.io/20lush/lush-dev:latest
+    docker pull -q ${image}
 fi
 
 echo "[INFO] Starting container with image: ${image} at ${mountdir}"
 docker run  -it \
             --rm \
-            -e "TERM=xterm-256color" \
             -h "lush-dev" \
             --network="host" \
             -v ${mountdir}:/repo \
