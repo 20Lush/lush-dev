@@ -39,4 +39,4 @@ if "%AUTOUPDATE%"=="TRUE" (
 )
 
 @echo [INFO] Starting container with image: %IMGARG% at %MOUNTDIR%
-docker run  -it --rm -e "TERM=xterm-256color" -h "lush-dev" --network="host" -v %MOUNTDIR%:/repo --entrypoint %ENTRYPOINT_SCRIPT% %IMGARG%
+docker run --gpus device=0 -it --rm -e "TERM=xterm-256color" -h "lush-dev" --network="host" -v %MOUNTDIR%:/repo --entrypoint %ENTRYPOINT_SCRIPT% %IMGARG%
